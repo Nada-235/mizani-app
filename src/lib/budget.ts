@@ -1,0 +1,7 @@
+export type Range = { min: number; max: number; period: "daily" | "monthly" };
+export type Budget = { salary: number; deductions: number; savings: number; days: number; transport: Range; food: Range; other: number };
+export const defaultBudget: Budget = { salary: 0, deductions: 0, savings: 0, days: 22, transport: { min: 0, max: 0, period: "daily" }, food: { min: 0, max: 0, period: "daily" }, other: 0 };
+const nonNegative = (n: number) => Number.isFinite(n) ? Math.max(0, n) : 0;
+export function rangeMonthly(range: Range, days: number) { const multiplier = range.period === "daily" ? nonNegative(days) : 1; return { min: Math.min(nonNegative(range.min), nonNegative(range.max)) * multiplier, max: Math.max(nonNegative(range.min), nonNegative(range.max)) * multiplier }; }
+export function calculateBudget(b: Budget) { const salary = nonNegative(b.salary); const deductions = nonNegative(b.deductions); const net = salary - deductions; const transport = rangeMonthly(b.transport,b.days); const food = rangeMonthly(b.food,b.days); const minExpenses = transport.min + food.min + nonNegative(b.other); const maxExpenses = transport.max + food.max + nonNegative(b.other); return { net, deductionPercentage: salary ? deductions / salary * 100 : 0, transport, food, minExpenses, maxExpenses, remainingMin: net - nonNegative(b.savings) - maxExpenses, remainingMax: net - nonNegative(b.savings) - minExpenses, annualSavings: nonNegative(b.savings) * 12 }; }
+export const money = (n: number) => Math.round(n).toLocaleString("en-US") + " د.ع";

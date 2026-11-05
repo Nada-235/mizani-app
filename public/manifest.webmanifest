@@ -1,0 +1,17 @@
+{
+  "name": "ميزانيتي",
+  "short_name": "ميزانيتي",
+  "description": "ميزانية شهرية بالدينار العراقي",
+  "start_url": "/mizani-app/",
+  "scope": "/mizani-app/",
+  "display": "standalone",
+  "background_color": "#f8f7fc",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "/mizani-app/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

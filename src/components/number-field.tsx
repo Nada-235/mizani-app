@@ -1,0 +1,2 @@
+type Props = { label: string; value: number; onChange: (value: number) => void };
+export function NumberField({ label, value, onChange }: Props) { return <label className="block space-y-2"><span className="text-sm font-medium text-slate-600">{label}</span><input aria-label={label} className="w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-left text-base tabular-nums shadow-sm" type="number" min="0" inputMode="decimal" value={value} onChange={e=>onChange(Math.max(0,Number(e.target.value)||0))} /></label>; }

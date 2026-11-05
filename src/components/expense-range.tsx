@@ -1,0 +1,3 @@
+import { Range } from "@/lib/budget";
+import { NumberField } from "./number-field";
+export function ExpenseRange({ value, onChange }: { value: Range; onChange: (v: Range)=>void }) { return <div className="space-y-4"><div className="flex gap-2">{(["daily","monthly"] as const).map(period=><button type="button" key={period} onClick={()=>onChange({...value,period})} className={`rounded-full px-4 py-2 text-sm ${value.period===period?"bg-violet-600 text-white":"bg-violet-50 text-violet-700"}`}>{period==="daily"?"يومي":"شهري"}</button>)}</div><div className="grid grid-cols-2 gap-3"><NumberField label="من" value={value.min} onChange={min=>onChange({...value,min})}/><NumberField label="إلى" value={value.max} onChange={max=>onChange({...value,max})}/></div></div>; }
